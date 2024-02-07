@@ -1,61 +1,28 @@
-function NewYear(){
-    const NewYeardate = new Date(2025, 0, 1);
-    const currentdate = new Date();
-    const remainigTime = NewYeardate - currentdate;
+const month = document.querySelector('.cont-months');
+const days = document.querySelector('.cont-days');
+const hour = document.querySelector('.cont-hour');
+const minute = document.querySelector('.cont-minute');
+const second = document.querySelector('.cont-second');
+
+function updateCounter() {
+  const currentTime = new Date();
+  const nextYear = new Date(`01-01-${currentTime.getFullYear() + 1} 00:00`);
   
-    // get days
-    const days = Math.floor(remainigTime / 86400000);
+  const diff  = nextYear.getTime() - currentTime.getTime();
   
-    // remainig hour
-  
-    const remainigHr = remainigTime - days * 1000 * 60 * 60 * 24;
-    const hours = Math.floor(remainigHr / 3600000);
-  
-    // remaining Minute
-    const remainigMin =
-      remainigTime - days * 1000 * 60 * 60 * 24 - hours * 1000 * 60 * 60;
-    const minutes = Math.floor(remainigMin / 60000);
-  
-    // remainig second
-    const remainigSec =
-      remainigTime -
-      days * 1000 * 60 * 60 * 24 -
-      hours * 1000 * 60 * 60 -
-      minutes * 1000 * 60;
-  const seconds =Math.floor(remainigSec / 1000);
-  
-  
-    const  containerDay = document.querySelector(".cont-days")
-    const  containerHour = document.querySelector(".cont-hour")
-    const  containerMin = document.querySelector(".cont-minute")
-    const  containerSec = document.querySelector(".cont-second")
-  if (+containerDay.textContent<10) {
-    containerDay.textContent=`0${days} days`
-  }
-  else{
-    containerDay.textContent=`${days} days`
-  
-  }
-  
-  if (containerHour.textContent<10) {
-    containerHour.textContent=`0${hours} hoours`
-  }
-  else{
-    containerHour.textContent=`${hours} hours`
-  }
-  
-  if (containerMin.textContent<10) {
-    containerMin.textContent=`${"0"+minutes} minutes`
-  }
-  else{
-    containerMin.textContent=`${minutes} minutes`
-  }
-  
-  if (+containerSec.textContent<10) {
-    containerSec.textContent=`${"0"+seconds} seconds`
-  }
-  else{
-    containerSec.textContent=`${seconds} seconds`
-  }
-  }
-  setInterval(NewYear,100)
+  const monthLeft = Math.floor(diff / 1000 / 60 / 60 / 24 / 30  % 12 )
+  const daysLeft = Math.floor(diff / 1000 / 60 / 60  / 24 % 30)
+  const hourLeft = Math.floor(diff / 1000 / 60 / 60 % 24 )
+  const minuteLeft = Math.floor(diff / 1000 / 60 % 60 )
+  const secondLeft = Math.floor(diff / 1000  % 60 )
+
+  month.innerText = `${monthLeft} месяцев`;
+  days.innerText = `${daysLeft} дней`;
+  hour.innerText = `${hourLeft} часов`;
+  minute.innerText = `${minuteLeft} минут`;
+  second.innerText = `${secondLeft} секунд`;
+ 
+}
+
+
+setInterval(updateCounter, 1000);
