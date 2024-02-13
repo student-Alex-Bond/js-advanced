@@ -1,16 +1,10 @@
 const isValidAge = (date) => {
-    const nowDate = new Date().getFullYear()
-    const checkedDate = new Date(date).getFullYear();
-    const different = nowDate - checkedDate;
+  const nowDate = new Date().getFullYear();
+  const checkedDate = new Date(date).getFullYear();
 
-    if(different > 14 ){
-        return true;
-    } else {
-        return false;
-    }
+  return nowDate - checkedDate > 14;
+};
 
-}
-
-console.log(isValidAge('2015-01-05'));
-console.log(isValidAge('2010-06-30'));
-console.log(isValidAge('2008-05-04'));
+console.log(isValidAge("2015-01-05"));
+console.log(isValidAge("2010-06-30"));
+console.log(isValidAge("2008-05-04"));
